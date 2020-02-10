@@ -15,7 +15,7 @@ void delay_1ms(uint8_t delay);
 void blue_led_fun(void* pv_parameter)
 {
 		while(1) {
-			delay_1ms(2);
+			delay_1ms(3);
 			GPIOF->DATA ^= 0x08;
 		}
 }
@@ -23,7 +23,7 @@ void blue_led_fun(void* pv_parameter)
 void red_led_fun(void* pv_parameter)
 {
 		while(1) {
-			delay_1ms(2);
+			delay_1ms(6);
 			GPIOF->DATA ^= 0x04;
 		}
 }
@@ -31,7 +31,7 @@ void red_led_fun(void* pv_parameter)
 void green_led_fun(void* pv_parameter)
 {
 		while(1) {
-			delay_1ms(2);
+			delay_1ms(1);
 			GPIOF->DATA ^= 0x02;
 		}
 }
@@ -42,9 +42,9 @@ int main()
 	gpio_init();
 	
 	
-	xTaskCreate(blue_led_fun, "blue led blinker", 100, NULL, 1, NULL );
-	xTaskCreate(red_led_fun, "red led blinker", 100, NULL, 1, NULL );
-	xTaskCreate(green_led_fun, "green led blinker", 100, NULL, 1, NULL );
+	xTaskCreate(blue_led_fun, "blue led blinker", 10, NULL, 1, NULL );
+	xTaskCreate(red_led_fun, "red led blinker", 10, NULL, 1, NULL );
+	xTaskCreate(green_led_fun, "green led blinker", 10, NULL, 1, NULL );
 	
 	
 	vTaskStartScheduler();
@@ -57,8 +57,8 @@ void toggle_led()
 
 void delay_1ms(uint8_t delay)
 {
-	uint32_t delay_i = 50000;
 	while(delay--) {
+		uint32_t delay_i = 75000;
 		while(delay_i--);
 	}
 	
